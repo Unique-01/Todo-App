@@ -1,0 +1,6 @@
+<form action="" method="post">
+    <p>Are you sure you want to delete {{todo}}?</p>
+    {% csrf_token %}
+    <button type="submit">Confirm Delete</button>
+    <button><a href="{% url 'todo_list' %}">Cancel</a></button>
+</form>

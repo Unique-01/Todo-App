@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo App in Django</title>
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+</head>
+
+<body>
+    <div class="container">
+        <div class="sub-container">
+            <header>TODO APP</header>
+            <form action="" method="post">
+                {% csrf_token %}
+                <div class="form-container">
+
+                    <div class="form-field description">
+                        <label class="label" for="">Description</label>
+                        <div> {{form.title}}</div>
+                    </div>
+                    <div class="date-category">
+                        <div class="form-field date">
+                            <label class="label" for="">{{form.due_date.label}}</label>
+                            <div>{{form.due_date}}</div>
+                        </div>
+
+                        <div class="form-field category">
+                            <label class="label" for="">Choose a category</label>
+                            <div>{{form.category}}</div>
+                        </div>
+                    </div>
+                    <div class="addtask-div">
+                        <button class="addtask" type="submit"><span class="add-icon" >&plus;</span> Add Task</button>
+                    </div>
+                </div>
+            </form>
+            <div>
+                {% for todo in todo_list %}
+                <hr>
+                <div class="todo_list">
+                    <div>
+                        <p class="todo-title"> {{todo.title}}</p>
+                        <small>{{todo.created}} -- {{todo.due_date}}</small>
+                    </div>
+                    <div>
+                        <p> <small class="category-list">{{todo.category}}</small> </p>
+                        <button class="delete"><a class="delete" href="{% url 'delete' todo.pk %}"> <span>&#10006;</span> Delete</a></button>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            
+        </div>
+        
+    </div>
+    <footer>
+        <p><small>Copyright &copy; Uniq Enterprise 2022</small></p>
+    </footer>
+
+</body>
+
+</html>
