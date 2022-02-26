@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load crispy_forms_tags %}
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo Signup</title>
+    <link rel="stylesheet" href="{% static 'glassmo.css' %}">
+</head>
+<body>
+    <div>
+        <form class="signup-form" action="" method="post">
+            <h1>SIGNUP</h1>
+            {% csrf_token %}
+            
+            {% for field in form %}
+            <label for="">{{field.label}}</label>
+                {{field}}
+                {% if field.help_text %}
+                    <small></small>
+                {% endif %}
+                
+                
+                {% for error in field.errors %}
+                    <small style="color: rgb(146, 13, 13);" >{{error}}</small>
+                {% endfor %}
+                    
+                    
+                    
+            {% endfor %}
+                
+                
+            <button type="submit">Signup</button>
+            <p><a href="{% url 'login' %}">Already have an account?  Login</a></p>
+        </form>
+    </div>
+</body>
+</html>

@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils import timezone
+from django.contrib.auth.models import User
 
 # Create your models here.
 
@@ -17,6 +18,7 @@ class Todo(models.Model):
     created = models.DateField(default=timezone.now().strftime("%Y-%m-%d"))
     due_date = models.DateField(default=timezone.now().strftime("%Y-%m-%d"))
     category = models.ForeignKey(Category,on_delete=models.CASCADE,default='General')
+    owner = models.ForeignKey(User,on_delete=models.CASCADE,null=True)
 
     class Meta:
         ordering = ['-created']

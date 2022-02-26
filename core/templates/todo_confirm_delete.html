@@ -1,6 +1,28 @@
-<form action="" method="post">
-    <p>Are you sure you want to delete {{todo}}?</p>
-    {% csrf_token %}
-    <button type="submit">Confirm Delete</button>
-    <button><a href="{% url 'todo_list' %}">Cancel</a></button>
-</form>
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+</head>
+
+<body>
+    <div class="del-form-div">
+        <div class="sub-del-form-div">
+            <form action="" method="post">
+                <p class="prompt">Are you sure you want to delete {{todo}}?</p>
+                {% csrf_token %}
+                <div class="btn-div">
+                    <button class="confirm" type="submit">Confirm Delete</button>
+                    <button class="cancel"><a class="cancel" href="{% url 'todo_list' %}">Cancel</a></button>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>

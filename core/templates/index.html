@@ -8,12 +8,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Todo App in Django</title>
     <link rel="stylesheet" href="{% static 'styles.css' %}">
+    <!-- <link rel="stylesheet" href="{% static 'glassmo.css' %}"> -->
 </head>
 
 <body>
+
+    {% if user.is_authenticated %}
+
+
+
     <div class="container">
         <div class="sub-container">
+           <div>
             <header>TODO APP</header>
+            <p>Welcome {{user.username}}</p>
+            <a href="{% url 'logout' %}">Logout</a>
+           </div>
             <form action="" method="post">
                 {% csrf_token %}
                 <div class="form-container">
@@ -34,12 +44,14 @@
                         </div>
                     </div>
                     <div class="addtask-div">
-                        <button class="addtask" type="submit"><span class="add-icon" >&plus;</span> Add Task</button>
+                        <button class="addtask" type="submit"><span class="add-icon">&plus;</span> Add Task</button>
                     </div>
                 </div>
             </form>
             <div>
                 {% for todo in todo_list %}
+
+                {% if request.user == todo.owner %}
                 <hr>
                 <div class="todo_list">
                     <div>
@@ -48,19 +60,23 @@
                     </div>
                     <div>
                         <p> <small class="category-list">{{todo.category}}</small> </p>
-                        <button class="delete"><a class="delete" href="{% url 'delete' todo.pk %}"> <span>&#10006;</span> Delete</a></button>
+                        <button class="delete"><a class="delete" href="{% url 'delete' todo.pk %}">
+                                <span>&#10006;</span> Delete</a></button>
                     </div>
                 </div>
+                {% endif %}
                 {% endfor %}
             </div>
-            
+
         </div>
-        
+
     </div>
+    {% else %}
+    <p>Login to add and view todos<a href="{% url 'login' %}">Login</a></p>
+    {% endif %}
     <footer>
         <p><small>Copyright &copy; Uniq Enterprise 2022</small></p>
     </footer>
-
 </body>
 
 </html>

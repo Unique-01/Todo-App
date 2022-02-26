@@ -7,7 +7,8 @@ a{
 }
 body{
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-    background-color: lawngreen;
+    /* background-color: lawngreen; */
+    background: linear-gradient(to right, #3f5efb, #330138);
 }
 .container{
     display: flex;
@@ -19,6 +20,7 @@ body{
     background-color: white;
     padding: 10px 0px;
     border-radius: 10px;
+
 }
 header{
     display: flex;
@@ -43,6 +45,7 @@ header{
     width: 250px;
     height: 50px;
     border: none;
+    background:white;
 }
 .description{
     border: 1px solid rgb(153, 149, 149);
@@ -118,7 +121,7 @@ header{
     padding: 8px;
     color: white;
     font-weight: 900;
-    
+
 }
 .delete{
     margin-top: 15px;
@@ -134,10 +137,72 @@ header{
 .todo-title{
     text-transform: capitalize;
 }
+small{
+    font-size:10px;
+}
 footer{
     display: flex;
     justify-content: center;
     margin-top: 30px;
     color: purple;
     font-weight: 900;
+}
+.del-form-div{
+    display:flex;
+    justify-content:center;
+}
+.sub-del-form-div{
+    background-color:white;
+    width:400px;
+    padding:50px 20px;
+
+}
+.confirm{
+    border:none;
+    /*background:rgb(165, 14, 14);*/
+    background:rgb(180, 15, 15);
+    border-radius:5px;
+    padding:5px;
+    color:white;
+    font-weight:900;
+    margin-right:20px;
+}
+.cancel{
+    border:none;
+    background:purple;
+    padding:5px;
+    color:white;
+    font-weight:900;
+    border-radius:5px;
+}
+.btn-div{
+    display:flex;
+    justify-content:center;
+    margin-top:20px;
+}
+.confirm:hover{
+    background:red;
+}
+.cancel:hover{
+    background:rgb(77, 4, 77);
+}
+.prompt{
+    color:red;
+}
+
+@media screen and (max-width:500px){
+    #id_title{
+        width:100%;
+    }
+    #id_category{
+        width:150px;
+    }
+    #id_due_date{
+        width:150px;
+
+    }
+    .addtask{
+        font-size:15px;
+        width:150px;
+    }
 }
