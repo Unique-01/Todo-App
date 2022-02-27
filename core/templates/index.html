@@ -19,11 +19,13 @@
 
     <div class="container">
         <div class="sub-container">
-           <div>
-            <header>TODO APP</header>
-            <p>Welcome {{user.username}}</p>
-            <a href="{% url 'logout' %}">Logout</a>
-           </div>
+            <div>
+                <header>TODO APP</header>
+                <div class="welcome-div">
+                    <p class="welcome" >Welcome {{user.username}}</p>
+                    <a class="logout" href="{% url 'logout' %}">Logout</a>
+                </div>
+            </div>
             <form action="" method="post">
                 {% csrf_token %}
                 <div class="form-container">
@@ -56,7 +58,7 @@
                 <div class="todo_list">
                     <div>
                         <p class="todo-title"> {{todo.title}}</p>
-                        <small>{{todo.created}} -- {{todo.due_date}}</small>
+                        <small>{{todo.created}} &rarr; {{todo.due_date}}</small>
                     </div>
                     <div>
                         <p> <small class="category-list">{{todo.category}}</small> </p>

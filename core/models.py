@@ -19,9 +19,10 @@ class Todo(models.Model):
     due_date = models.DateField(default=timezone.now().strftime("%Y-%m-%d"))
     category = models.ForeignKey(Category,on_delete=models.CASCADE,default='General')
     owner = models.ForeignKey(User,on_delete=models.CASCADE,null=True)
+    time = models.DateTimeField(auto_now_add=True,blank=True,null=True)
 
     class Meta:
-        ordering = ['-created']
+        ordering = ['-time']
 
     def __str__(self):
         return self.title
