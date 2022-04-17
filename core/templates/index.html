@@ -1,84 +1,90 @@
 <!DOCTYPE html>
 <html lang="en">
-{% load static %}
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Todo App in Django</title>
-    <link rel="stylesheet" href="{% static 'styles.css' %}">
-    <!-- <link rel="stylesheet" href="{% static 'glassmo.css' %}"> -->
-</head>
-
-<body>
-
-    {% if user.is_authenticated %}
-
-
-
-    <div class="container">
-        <div class="sub-container">
-            <div>
-                <header>TODO APP</header>
-                <div class="welcome-div">
-                    <p class="welcome" >Welcome {{user.username}}</p>
-                    <a class="logout" href="{% url 'logout' %}">Logout</a>
-                </div>
-            </div>
-            <form action="" method="post">
-                {% csrf_token %}
-                <div class="form-container">
-
-                    <div class="form-field description">
-                        <label class="label" for="">Description</label>
-                        <div> {{form.title}}</div>
-                    </div>
-                    <div class="date-category">
-                        <div class="form-field date">
-                            <label class="label" for="">{{form.due_date.label}}</label>
-                            <div>{{form.due_date}}</div>
-                        </div>
-
-                        <div class="form-field category">
-                            <label class="label" for="">Choose a category</label>
-                            <div>{{form.category}}</div>
+    {% load static %}
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Todo App in Django</title>
+        <link rel="stylesheet" href="{% static 'styles.css' %}">
+        <!-- <link rel="stylesheet" href="{% static 'glassmo.css' %}"> -->
+    </head>
+    <body>
+        {% if user.is_authenticated %}
+            <main role="main" class="container">
+                <section class="sub-container">
+                    <div>
+                        <header>
+                            TODO APP
+                        </header>
+                        <div class="welcome-div">
+                            <p class="welcome">
+                                Welcome {{ user.username | capfirst }}
+                            </p>
+                            <a class="logout" href="{% url 'logout' %}">Logout</a>
                         </div>
                     </div>
-                    <div class="addtask-div">
-                        <button class="addtask" type="submit"><span class="add-icon">&plus;</span> Add Task</button>
-                    </div>
-                </div>
-            </form>
-            <div>
-                {% for todo in todo_list %}
-
-                {% if request.user == todo.owner %}
-                <hr>
-                <div class="todo_list">
+                    <form action="" method="post">
+                        {% csrf_token %}
+                        <div class="form-container">
+                            <div class="form-field description">
+                                <label class="label" for="">Description</label>
+                                <div>{{ form.title }}</div>
+                            </div>
+                            <div class="date-category">
+                                <div class="form-field date">
+                                    <label class="label" for="">{{ form.due_date.label }}</label>
+                                    <div>{{ form.due_date }}</div>
+                                </div>
+                                <div class="form-field category">
+                                    <label class="label" for="">Choose a category</label>
+                                    <div>{{ form.category }}</div>
+                                </div>
+                            </div>
+                            <div class="addtask-div">
+                                <button class="addtask" type="submit">
+                                    <span class="add-icon">&plus;</span> Add Task
+                                </button>
+                            </div>
+                        </div>
+                    </form>
                     <div>
-                        <p class="todo-title"> {{todo.title}}</p>
-                        <small>{{todo.created}} &rarr; {{todo.due_date}}</small>
+                        {% for todo in todo_list %}
+                            {% if request.user == todo.owner %}
+                                <hr>
+                                <div class="todo_list">
+                                    <div>
+                                        <p class="todo-title">
+                                            {{ todo.title }}
+                                        </p>
+                                        <small>{{ todo.created }} &rarr; {{ todo.due_date }}</small>
+                                    </div>
+                                    <div>
+                                        <p>
+                                            <small class="category-list">{{ todo.category }}</small>
+                                        </p>
+                                        <button class="delete">
+                                            <a class="delete" href="{% url 'delete' todo.pk %}">
+                                                <span>&#10006;</span> Delete
+                                            </a>
+                                        </button>
+                                    </div>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
                     </div>
-                    <div>
-                        <p> <small class="category-list">{{todo.category}}</small> </p>
-                        <button class="delete"><a class="delete" href="{% url 'delete' todo.pk %}">
-                                <span>&#10006;</span> Delete</a></button>
-                    </div>
-                </div>
-                {% endif %}
-                {% endfor %}
-            </div>
-
-        </div>
-
-    </div>
-    {% else %}
-    <p>Login to add and view todos<a href="{% url 'login' %}">Login</a></p>
-    {% endif %}
-    <footer>
-        <p><small>Copyright &copy; Uniq Enterprise 2022</small></p>
-    </footer>
-</body>
-
+                </section>
+            </main>
+        {% else %}
+            <p>
+                Login to add and view todos
+                <a href="{% url 'login' %}">Login</a>
+            </p>
+        {% endif %}
+        <footer>
+            <p>
+                <small>Copyright &copy; Uniq Enterprise 2022</small>
+            </p>
+        </footer>
+    </body>
 </html>
